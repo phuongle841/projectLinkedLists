@@ -3,6 +3,15 @@ module.exports.add = function (a, b) {
   return a + b;
 };
 
-module.exports.subtract = function (a, b) {
-  return a - b;
-};
+class Node {
+  value = null;
+  next = null;
+  constructor(value) {
+    this.value = value;
+  }
+  display() {
+    console.log(this.value);
+  }
+}
+
+module.exports.Node = Node;
