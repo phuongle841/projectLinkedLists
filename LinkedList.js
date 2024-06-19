@@ -1,6 +1,4 @@
-const { add, Node } = require("./Node");
-add(3.4);
-const node = new Node();
+const { Node } = require("./Node");
 
 class LinkedList {
   root;
@@ -99,7 +97,6 @@ class LinkedList {
     let result = 0;
     let current = this.root;
     while (current != null) {
-      console.log(result);
       result++;
       if (current.value == value) {
         return result;
@@ -118,21 +115,32 @@ class LinkedList {
     result.push("null");
     return result;
   }
+  insertAt(value, index) {
+    let current = this.root;
+    let parent = this.root;
+    while (current != null) {
+      index--;
+      parent = current;
+      current = current.next;
+      if (index == 1) {
+        const newNode = new Node(value);
+        parent.next = newNode;
+        newNode.next = current;
+        break;
+      }
+    }
+  }
+  removeAt(value) {
+    let parent = this.root;
+    let current = this.root;
+    while (current.next != null) {
+      parent = current;
+      current = current.next;
+      if (current.value == value) {
+        parent.next = current.next;
+      }
+    }
+  }
 }
-const linkedList = new LinkedList();
-linkedList.append(1);
-linkedList.append(5);
-linkedList.append(2);
-linkedList.append(1444);
-linkedList.append(3);
-linkedList.append(39);
-linkedList.append(99);
-console.log("the size of linked list is: " + linkedList.size());
-console.log("the head value of linked list:" + linkedList.head());
-console.log("the tail value of linked list:" + linkedList.tail());
-console.log("the value at 5 in the linked list:" + linkedList.at(5));
-linkedList.pop();
-console.log("the tail value of linked list:" + linkedList.tail());
-console.log("Linked list contains 1444:" + linkedList.contains(1444));
-console.log("Position of 39:" + linkedList.find(39));
-console.log("Linked list to string is:" + linkedList.toString());
+
+module.exports.LinkedList = LinkedList;
